@@ -26,16 +26,6 @@
     })();
   <% end %>
 
-  <%= javascript_tag do %>
-    (function() {
-      var s = document.createElement('script'), t = document.getElementsByTagName('script')[0];
-      s.type = 'text/javascript';
-      s.async = true;
-      s.src = 'http://api.flattr.com/js/0.6/load.js?mode=auto';
-      t.parentNode.insertBefore(s, t);
-    })();
-  <% end %>
-
   <script>(function() {
   var _fbq = window._fbq || (window._fbq = []);
   if (!_fbq.loaded) {
@@ -67,11 +57,15 @@
           <%= render :partial => 'shared/flash', :locals => {:flash => flash} %>
         </div>
 
-        <%= render :partial => 'shared/adv_leaderboard' %>
+        <% unless current_user %>
+          <%= render :partial => 'shared/adv_leaderboard' %>
+        <% end %>
 
         <%= yield %>
 
-        <%= render :partial => 'shared/adv_leaderboard' %>
+        <% unless current_user %>
+          <%= render :partial => 'shared/adv_leaderboard' %>
+        <% end %>
 
       </div>
     </div>
